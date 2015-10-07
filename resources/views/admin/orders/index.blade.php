@@ -23,7 +23,7 @@
                 <tr>
                     <td>{{$order->id}}</td>
                     <td>{{$order->client->name}}</td>
-                    <td>{{$order->name}}</td>
+                    <td>{{$order->deliveryman->name}}</td>
                     <td>{{$order->status}}</td>
                     <td>{{$order->total}}</td>
                     <td>
