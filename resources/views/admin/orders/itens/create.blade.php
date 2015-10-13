@@ -6,7 +6,8 @@
 
         @include('errors._check')
 
-        {!! Form::model(['route' => 'admin.orders.itens.store', $idOrder]) !!}
+        {{--{!! Form::model(null, ['route' => 'admin.orders.itens.store', $idOrder]) !!}--}}
+        {!! Form::model(null, ['route' => ['admin.orders.itens.store', $idOrder]]) !!}
 
             @include('admin.orders.itens._form')
 

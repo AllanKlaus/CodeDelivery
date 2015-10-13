@@ -1,10 +1,6 @@
 <div class="form-group">
     {!! Form::label('User', 'Usuário:') !!}
-    {!! Form::text('user[name]', null, ['class' => 'form-control']) !!}
-</div>
-<div class="form-group">
-    {!! Form::label('User', 'E-mail:') !!}
-    {!! Form::text('user[email]', null, ['class' => 'form-control']) !!}
+    {!! Form::select('user_id', $users, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::label('Phone', 'Telefone:') !!}
