@@ -48,8 +48,9 @@ class OrdersController extends Controller
     public function edit($id){
         $order = $this->repository->find($id);
         $clients = $this->UserRepository->lists(['name', 'id']);
+        $deliveryman = $this->UserRepository->getDeliveryman();
         $status = $this->status;
-        return view('admin.orders.edit', compact('order', 'clients', 'status'));
+        return view('admin.orders.edit', compact('order', 'clients', 'deliveryman', 'status'));
     }
 
     public function update(AdminOrderRequest $request, $id){
