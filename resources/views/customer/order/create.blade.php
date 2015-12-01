@@ -24,7 +24,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select class="form-control" name="item[0][product_id]">
+                                    <select class="form-control" name="items[0][product_id]">
                                         @foreach($products as $p)
                                             <option value="{{$p->id}}" data-price="{{$p->price}}">{{$p->name}} - {{$p->price}}</option>
                                         @endforeach

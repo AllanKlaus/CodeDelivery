@@ -36,7 +36,8 @@ class OrdersController extends Controller
     public function create(){
         $status = $this->status;
         $clients = $this->UserRepository->lists(['name', 'id']);
-        return view('admin.orders.create', compact('clients', 'status'));
+        $deliveryman = $this->UserRepository->getDeliveryman();
+        return view('admin.orders.create', compact('clients', 'deliveryman', 'status'));
     }
 
     public  function store(AdminOrderRequest $request){

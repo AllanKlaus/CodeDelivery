@@ -21,7 +21,7 @@ class OrderService {
     }
 
     public  function create(array $data){
-        DB::beginTransaction;
+        DB::beginTransaction();
 //        $this->db::
         try{
             $data['status'] = 0;
