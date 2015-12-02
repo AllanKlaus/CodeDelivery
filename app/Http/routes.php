@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 //Route::get('categories', function () {
@@ -20,7 +20,7 @@ Route::get('/', function () {
 //    return $repository->all();
 //});
 
-Route::group(['prefix'=>'admin', 'middleware' => 'auth.checkrole' , 'as' => 'admin.'], function(){
+Route::group(['prefix'=>'admin', 'middleware' => 'auth.checkrole:Admin' , 'as' => 'admin.'], function(){
 
     Route::get('categories', ['as' => 'categories.index', 'uses' => 'CategoriesController@index']);
     Route::group(['prefix'=>'categories', 'as' => 'categories.'], function() {
@@ -85,7 +85,7 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth.checkrole' , 'as' => 'adm
     });
 });
 
-Route::group(['prefix'=>'customer', 'as' => 'customer.'], function(){
+Route::group(['prefix'=>'customer', 'middleware' => 'auth.checkrole:client', 'as' => 'customer.'], function(){
     Route::get('order', ['as' => 'order.index', 'uses' => 'CheckoutController@index']);
     Route::group(['prefix'=>'order', 'as' => 'order.'], function() {
         Route::get('create', ['as' => 'create', 'uses' => 'CheckoutController@create']);
