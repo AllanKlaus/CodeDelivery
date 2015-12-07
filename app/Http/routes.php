@@ -100,6 +100,11 @@ Route::post('oauth/access_token', function() {
 Route::group(['prefix'=>'api', 'middleware' => 'oauth', 'as' => 'api.'], function(){
 
     Route::group(['prefix'=>'client', 'middleware' => 'oauth.checkrole:client', 'as' => 'client.'], function(){
+
+        Route::resource('order', 'Api\Client\ClientCheckoutController', [
+            'except' => ['create', 'edit', 'destroy']
+        ]);
+
         Route::get('pedidos', function(){
             return [
                 'id' => 1,
@@ -110,6 +115,9 @@ Route::group(['prefix'=>'api', 'middleware' => 'oauth', 'as' => 'api.'], functio
     });
 
     Route::group(['prefix'=>'deliveryman', 'middleware' => 'oauth.checkrole:deliveryman', 'as' => 'deliveryman.'], function(){
+        Route::resource('order', 'Api\Deliveryman\DeliverymanCheckoutController', [
+            'except' => ['create', 'edit', 'destroy', 'store']
+        ]);
         Route::get('pedidos', function(){
             return [
                 'id' => 1,

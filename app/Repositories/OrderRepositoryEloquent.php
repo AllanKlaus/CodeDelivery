@@ -13,6 +13,18 @@ use CodeDelivery\Models\Order;
  */
 class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
+
+    public function getByIdAndDeliveryman($id, $idDeliveryman){
+        $result = $this->with(['client', 'items.product', 'cupom'])->findWhere([
+                'id' => $id,
+                'user_deliveryman_id' => $idDeliveryman
+            ]);
+
+        if($result instanceof Collection){
+            $result->first();
+        }
+        return $result;
+    }
     /**
      * Specify Model class name
      *
