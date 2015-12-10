@@ -12,10 +12,11 @@ class OAuthClientSeeder extends Seeder
      */
     public function run()
     {
-        factory(OAuth::class)->create([
-            'client_id' => 'appid01',
-            'client_secret' => 'secret',
-            'app' => 'Minha App Mobile',
-        ])->save();
+//        factory(OAuth::class)->create([
+//            'client_id' => 'appid01',
+//            'client_secret' => 'secret',
+//            'app' => 'Minha App Mobile',
+//        ])->save();
+        DB::insert('Insert into oauth_clients (client_id, client_secret, app) values (?, ?)', ['appid01', 'secret', 'Minha App Mobile']);
     }
 }
