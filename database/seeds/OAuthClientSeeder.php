@@ -17,6 +17,7 @@ class OAuthClientSeeder extends Seeder
 //            'client_secret' => 'secret',
 //            'app' => 'Minha App Mobile',
 //        ])->save();
-        DB::insert('Insert into oauth_clients (client_id, client_secret, app) values (?, ?)', ['appid01', 'secret', 'Minha App Mobile']);
+//        DB::insert('Insert into oauth_clients (client_id, client_secret, app) values (?, ?)', ['appid01', 'secret', 'Minha App Mobile']);
+        DB::insert('Insert into oauth_clients (id, secret, name) values (?, ?, ?)', ['appid01', 'secret', 'Minha App Mobile']);
     }
 }

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use CodeDelivery\Http\Requests;
 use CodeDelivery\Http\Requests\AdminClientRequest;
 use CodeDelivery\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class clientsController extends Controller
 {
@@ -45,5 +47,9 @@ class clientsController extends Controller
         $data = $request->all();
         $this->clientService->update($data, $id);
         return redirect()->route('admin.clients.index');
+    }
+
+    public function authenticated(){
+        return $this->clientService->userRepository->find(Authorizer::getResourceOwnerID());
     }
 }

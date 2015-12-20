@@ -6,7 +6,7 @@ use CodeDelivery\Repositories\UserRepository;
 use CodeDelivery\Repositories\ClientRepository;
 
 class ClientService {
-    private $clientRepository, $userRepository;
+    public $clientRepository, $userRepository;
 
     public function __construct(ClientRepository $repository, UserRepository $userRepository){
         $this->clientRepository = $repository;

@@ -52,6 +52,5 @@ class DeliverymanCheckoutController extends Controller
         } else {
             abort(400, 'Order não encontrado');
         }
-
     }
 }

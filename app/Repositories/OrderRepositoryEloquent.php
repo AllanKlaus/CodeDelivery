@@ -20,8 +20,8 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
                 'user_deliveryman_id' => $idDeliveryman
             ]);
 
-        $result->first();
-        return $result;
+        return $result->first();
+//        $result;
     }
     /**
      * Specify Model class name
