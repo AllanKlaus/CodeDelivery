@@ -16,7 +16,7 @@ class CreateCupomsTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->decimal('value');
-            $table->boolean('user')->default(0);
+            $table->boolean('used')->default(0);
             $table->timestamps();
         });
 

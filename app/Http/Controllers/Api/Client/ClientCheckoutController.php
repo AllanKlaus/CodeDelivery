@@ -2,8 +2,7 @@
 
 namespace CodeDelivery\Http\Controllers\Api\Client;
 
-use CodeDelivery\Http\Requests\AdminClientRequest;
-use CodeDelivery\Http\Requests\ApiClientRequest;
+use CodeDelivery\Http\Requests\CheckoutRequest;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\UserRepository;
 use CodeDelivery\Repositories\ProductRepository;
@@ -55,7 +54,7 @@ class ClientCheckoutController extends Controller
         return view('customer.order.create', compact('products'));
     }
 
-    public  function store(ApiClientRequest $request){
+    public  function store(CheckoutRequest $request){
         $id = Authorizer::getResourceOwnerID();
         $data = $request->all();
         $clientId = $this->userRepository->find($id)->client->id;
