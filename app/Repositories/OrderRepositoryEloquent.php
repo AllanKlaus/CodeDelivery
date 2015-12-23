@@ -14,6 +14,8 @@ use CodeDelivery\Models\Order;
 class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 {
 
+    protected $skipPresenter = true;
+
     public function getByIdAndDeliveryman($id, $idDeliveryman){
         $result = $this->with(['client', 'items.product', 'cupom'])->findWhere([
                 'id' => $id,
@@ -22,6 +24,11 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 
         return $result->first();
 //        $result;
+    }
+
+    public function presenter(){
+        return \CodeDelivery\Presenters\OrderPresenter::class;
+//        return \Prettus\Repository\Presenter\ModelFractalPresenter::class;
     }
     /**
      * Specify Model class name
