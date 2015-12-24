@@ -19,6 +19,8 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      * @return string
      */
 
+    protected $skipPresenter = true;
+
     public function lists(){
         return $this->model->get(['id', 'name', 'price']);
     }
@@ -34,5 +36,9 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter(){
+        return \CodeDelivery\Presenters\ProductPresenter::class;
     }
 }

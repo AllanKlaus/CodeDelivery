@@ -12,8 +12,8 @@ use League\Fractal\TransformerAbstract;
  */
 class OrderTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['cupom', 'client'];
-    protected $availableIncludes = ['items'];
+    protected $defaultIncludes = [];
+    protected $availableIncludes = ['items', 'cupom', 'client'];
     /**
      * Transform the \Order entity
      * @param \Order $model
