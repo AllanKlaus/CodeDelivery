@@ -25,7 +25,7 @@ class Order extends Model implements Transformable
     }
 
     public function client(){
-        return $this->belongsTo(User::Class);
+        return $this->belongsTo(Client::Class);
     }
 
     public function cupom(){
