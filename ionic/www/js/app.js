@@ -86,4 +86,8 @@ angular.module('starter', [
 
     $urlRouterProvider.otherwise('/login');
 
-});
+})
+    .service('cart', function(){
+        this.items = [];
+    })
+;
