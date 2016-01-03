@@ -13,7 +13,7 @@ use League\Fractal\TransformerAbstract;
 class OrderTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [];
-    protected $availableIncludes = ['items', 'cupom', 'client'];
+    protected $availableIncludes = ['items', 'cupom', 'client', 'deliveryman'];
     /**
      * Transform the \Order entity
      * @param \Order $model
@@ -22,17 +22,22 @@ class OrderTransformer extends TransformerAbstract
      */
     public function transform(Order $model) {
         return [
-            'id'         => (int)$model->id,
+//            'id'         => (int)$model->id,
             'total'      => (float)$model->total,
+            'status'      => (string)$model->status,
             /* place your other model properties here */
 
             'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+//            'updated_at' => $model->updated_at
         ];
     }
 
     public function includeClient(Order $model){
         return $this->item($model->client, new ClientTransformer());
+    }
+
+    public function includeDeliveryman(Order $model){
+        return $this->item($model->deliveryman, new DeliverymanTransformer());
     }
 
     public function includeCupom(Order $model){

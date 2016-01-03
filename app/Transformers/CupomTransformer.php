@@ -20,12 +20,12 @@ class CupomTransformer extends TransformerAbstract
      */
     public function transform(Cupom $model) {
         return [
-            'id'         => (int)$model->id,
+            'code'         => (int)$model->code,
 
             /* place your other model properties here */
 
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+//            'created_at' => $model->created_at,
+//            'updated_at' => $model->updated_at
         ];
     }
 }

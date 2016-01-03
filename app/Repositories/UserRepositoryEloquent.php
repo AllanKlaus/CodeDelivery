@@ -19,6 +19,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      * @return string
      */
 
+    protected $skipPresenter = true;
+
     public function lists(){
 //        return $this->model->lists('name', 'id');
         return $this->model->where(['role' => 'client'])->lists('name', 'id');
@@ -39,5 +41,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter(){
+        return \CodeDelivery\Presenters\UserPresenter::class;
     }
 }

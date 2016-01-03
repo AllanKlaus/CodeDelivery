@@ -20,12 +20,20 @@ class ClientTransformer extends TransformerAbstract
      */
     public function transform(Client $model) {
         return [
-            'id'         => (int)$model->id,
+//            'id'         => (int)$model->id,
+
+            'name'         => (string)$model->name,
+            'email'         => (string)$model->email,
+            'phone'         => (string)$model->phone,
+            'address'         => (string)$model->address,
+            'zipcode'         => (string)$model->zipcode,
+            'city'         => (string)$model->city,
+            'state'         => (string)$model->state,
 
             /* place your other model properties here */
 
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+//            'created_at' => $model->created_at,
+//            'updated_at' => $model->updated_at
         ];
     }
 }
