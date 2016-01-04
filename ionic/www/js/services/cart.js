@@ -15,11 +15,11 @@ angular.module('starter.services')
         };
 
         this.getItem = function(i){
-            return $this.get().items[i];
+            return this.get().items[i];
         };
 
         this.addItem = function(item){
-            var cart = $this.get(), itemAux, exists = false;
+            var cart = this.get(), itemAux, exists = false;
             for (var index in cart.items){
                 itemAux =  cart.items[index];
                 if(itemAux.id == item.id){
@@ -38,7 +38,7 @@ angular.module('starter.services')
         };
 
         this.removeItem = function(i){
-            var cart = $this.get();
+            var cart = this.get();
             cart.items.splice(i, 1);
             cart.total = getTotal(cart.items);
             $localStorage.setObject(key, cart);
