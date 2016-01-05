@@ -1,24 +1,10 @@
 angular.module('starter.controllers')
-    .controller('ClientCheckoutDetailCtrl', ['$scope', 'OAuth', '$state', '$ionicPopup', function($scope, OAuth, $state, $ionicPopup){
+    .controller('ClientCheckoutDetailCtrl', ['$scope', '$state', '$stateParams', '$cart',
+        function($scope, $state, $stateParams, $cart){
+        $scope.product = $cart.getItem($stateParams.index);
 
-        $scope.user = {
-            username: '',
-            password: ''
-        };
-
-        $scope.login = function(){
-            OAuth.getAccessToken($scope.user)
-                .then(function(data){
-                    $state.go('home');
-                    //console.log(data);
-                    //token = $cookies.getObject('token');
-                    //console.log(token);
-                    //console.log(token.access_token);
-                }, function(responseError){
-                    $ionicPopup.alert({
-                        title: 'Erro',
-                        template: 'Login e/ou senha inválidos'
-                    });
-                });
-        };
+        $scope.updateQtd = function(){
+            $cart.updateQtd($stateParams.index, $scope.product.qtd);
+            $state.go('client.checkout');
+        }
     }]);

@@ -1,15 +1,15 @@
 <ion-view>
     <ion-nav-title>Pedido</ion-nav-title>
     <div class="bar bar-subheader">
+        <button class="button button-ion ion-plus button-clear" ng-click="openListProducts()"></button>
         <h2 class="title">
             Total: R$ {{total}}
-            <button class="nutton button-ion ion-minus-circled button-clear" ng-click="showDelete = !showDelete"></button>
         </h2>
-
+        <button class="button button-ion ion-minus-circled button-clear" ng-click="showDelete = !showDelete"></button>
     </div>
     <ion-content class="padding has-subheader">
         <ion-list show-delete="showDelete">
-            <ion-item ng-repeat="o in items">
+            <ion-item ng-repeat="o in items" ng-click="openProductDetail($index)">
                 <h2>{{o.name}}</h2>
                 <div class="row">
                     <div class="col">
@@ -20,6 +20,9 @@
                         <i class="icon ion-social-usd"> {{o.qtd * o.price}}</i>
                     </div>
                 </div>
+                <button class="button button-assertive button-full" ng-click="save()">
+                    Salvar Pedido
+                </button>
                 <ion-delete-button class="ion ion-minus-circled" ng-click="removeItem($index)"></ion-delete-button>
             </ion-item>
         </ion-list>
