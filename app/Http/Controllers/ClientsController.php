@@ -50,6 +50,6 @@ class clientsController extends Controller
     }
 
     public function authenticated(){
-        return $this->clientService->userRepository->find(Authorizer::getResourceOwnerID());
+        return $this->clientService->userRepository->skipPresenter(false)->find(Authorizer::getResourceOwnerID());
     }
 }

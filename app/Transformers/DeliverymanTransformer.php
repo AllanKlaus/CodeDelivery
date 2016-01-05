@@ -18,7 +18,7 @@ class DeliverymanTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform(Deliveryman $model) {
+    public function transform(User $model) {
         return [
             'id'         => (int)$model->id,
 

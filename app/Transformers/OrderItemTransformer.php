@@ -32,7 +32,7 @@ class OrderItemTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeProducts(Order $model){
-        return $this->collection($model->products, new ProductTransformer());
+    public function includeProducts(OrderItem $model){
+        return $this->item($model->product, new ProductTransformer());
     }
 }

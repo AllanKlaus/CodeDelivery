@@ -79,6 +79,11 @@ angular.module('starter', [
             templateUrl: 'templates/client/checkout-item-detail.html',
             controller: 'ClientCheckoutDetailCtrl'
         })
+        .state('client.checkout_successful', {
+            url: '/checkout/successful',
+            templateUrl: 'templates/client/checkout_successful.html',
+            controller: 'ClientCheckoutSuccessful'
+        })
         .state('client.view_products', {
             url: '/view_products',
             templateUrl: 'templates/client/view-products.html',
