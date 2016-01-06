@@ -2,6 +2,7 @@
 
 namespace CodeDelivery\Repositories;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeDelivery\Repositories\CupomRepository;
@@ -13,13 +14,9 @@ use CodeDelivery\Models\Cupom;
  */
 class CupomRepositoryEloquent extends BaseRepository implements CupomRepository
 {
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
-    public function model()
-    {
+    protected $skipPresenter = true;
+
+    public function model(){
         return Cupom::class;
     }
 
@@ -29,5 +26,20 @@ class CupomRepositoryEloquent extends BaseRepository implements CupomRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter(){
+        return \CodeDelivery\Presenters\CupomPresenter::class;
+    }
+
+    public function findByCode($code){
+        $result = $this->model
+            ->where('code', $code)
+            ->where('used', 0)
+            ->first();
+        if($result){
+            return $this->parserResult($result);
+        }
+        throw(new ModelNotFoundException)->setModel(get_class($this->model));
     }
 }

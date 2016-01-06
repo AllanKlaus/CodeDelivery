@@ -123,5 +123,7 @@ Route::group(['middleware' => 'cors'], function() {
                 'as' => 'orders.update_status'
             ]);
         });
+
+        Route::get('cupom/{code}', 'Api\CupomController@show');
     });
 });

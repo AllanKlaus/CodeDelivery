@@ -9,8 +9,8 @@ angular.module('starter.controllers')
         $scope.login = function(){
             OAuth.getAccessToken($scope.user)
                 .then(function(data){
-                    $state.go('home');
-                    //console.log(data);
+                    console.log(data);
+                    $state.go('client.checkout');
                     //token = $cookies.getObject('token');
                     //console.log(token);
                     //console.log(token.access_token);
