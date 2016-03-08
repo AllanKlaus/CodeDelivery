@@ -6,17 +6,20 @@
 
 angular.module('starter.controllers', []);
 angular.module('starter.services', []);
+angular.module('starter.filters', []);
 
 angular.module('starter', [
     'ionic',
     'starter.controllers',
     'starter.services',
+    'starter.filters',
     'angular-oauth2',
-    'ngResource'
+    'ngResource',
+    'ngCordova'
 ])
 
     .constant('appConfig', {
-        baseUrl: 'http://192.168.245.1:8000' //http://192.168.245.1:8000/
+        baseUrl: 'http://192.168.0.15:8000' //http://192.168.245.1:8000/
     })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -65,8 +68,21 @@ angular.module('starter', [
         })
         .state('client', {
             abstract: true,
+            cache: false,
             url: '/client',
-            template: '<ion-nav-view/>'
+            templateUrl: 'templates/menu.html',
+            controller: 'ClientMenuCtrl'
+        })
+        .state('client.order', {
+            cache: false,
+            url: '/checkout',
+            templateUrl: 'templates/client/order.html',
+            controller: 'ClientOrderCtrl'
+        })
+        .state('client.view_order', {
+            url: '/view_order/:id',
+            templateUrl: 'templates/client/view-order.html',
+            controller: 'ClientViewOrderCtrl'
         })
         .state('client.checkout', {
             cache: false,
@@ -90,6 +106,25 @@ angular.module('starter', [
             url: '/view_products',
             templateUrl: 'templates/client/view-products.html',
             controller: 'ClientCheckoutProductCtrl'
+        })
+
+        .state('deliveryman', {
+            abstract: true,
+            cache: false,
+            url: '/deliveryman',
+            templateUrl: 'templates/deliveryman/menu.html',
+            controller: 'DeliverymanMenuCtrl'
+        })
+        .state('deliveryman.order', {
+            cache: false,
+            url: '/order',
+            templateUrl: 'templates/deliveryman/order.html',
+            controller: 'DeliverymanOrderCtrl'
+        })
+        .state('deliveryman.view_order', {
+            url: '/view_order/:id',
+            templateUrl: 'templates/deliveryman/view-order.html',
+            controller: 'DeliverymanViewOrderCtrl'
         });
 
     $urlRouterProvider.otherwise('/login');
@@ -106,7 +141,7 @@ angular.module('starter', [
             },
             getToken:{
                 value: function(){
-                    $localStorage.getObject('token');
+                    return $localStorage.getObject('token');
                 },
                 writable: true,
                 enumerable: true,

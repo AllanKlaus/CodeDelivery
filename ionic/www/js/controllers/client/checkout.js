@@ -1,7 +1,13 @@
 angular.module('starter.controllers')
     .controller('ClientCheckoutCtrl', [
-        '$scope', '$state', '$cart', 'Order', '$ionicLoading', '$ionicPopup', 'Cupom',
-        function($scope, $state, $cart, Order, $ionicLoading, $ionicPopup, Cupom){
+        '$scope', '$state', '$cart', 'ClientOrder', '$ionicLoading', '$ionicPopup', 'Cupom', '$cordovaBarcodeScanner', 'User',
+        function($scope, $state, $cart, ClientOrder, $ionicLoading, $ionicPopup, Cupom, $cordovaBarcodeScanner, User){
+            User.authenticated({}, function(data){
+                console.log(data.data);
+            }, function(error){
+                console.log(error);
+            });
+
             var cart = $cart.get();
             $scope.cupom = cart.cupom;
             $scope.items = cart.items;
@@ -36,7 +42,7 @@ angular.module('starter.controllers')
                     o.cupom_code = $scope.cupom.code;
                 }
 
-                Order.save({id:null}, o, function(data){
+                ClientOrder.save({id:null}, o, function(data){
                     $ionicLoading.hide();
                     $state.go('client.checkout_successful');
                 }, function(responseError){
@@ -49,7 +55,18 @@ angular.module('starter.controllers')
             };
 
             $scope.readBarCode = function(){
-                getValueCupom(9467);
+                //getValueCupom(5959);
+                $cordovaBarcodeScanner
+                    .scan()
+                    .then(function(barcodeData) {
+                        getValueCupom(barcodeData.text);
+                    }, function(error) {
+                        console.log(error)
+                        $ionicPopup.alert({
+                            title: 'Erro',
+                            template: 'Não foi possivel ler o QR Code'
+                        });
+                    });
             };
 
             $scope.removeCupom = function(){
@@ -70,6 +87,7 @@ angular.module('starter.controllers')
                     $scope.total = $cart.getTotalFinal();
                 }, function(responseError){
                     $ionicLoading.hide();
+                    console.log(code, responseError);
                     $ionicPopup.alert({
                         title: 'Erro',
                         template: 'Cupom não encontrado'
