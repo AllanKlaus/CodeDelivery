@@ -20,6 +20,7 @@ angular.module('starter', [
 
     .constant('appConfig', {
         baseUrl: 'http://192.168.0.15:8000' //http://192.168.245.1:8000/
+        //baseUrl: 'http://10.0.0.106:8000' //http://192.168.245.1:8000/
     })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

@@ -10,11 +10,20 @@ angular.module('starter.services')
         );
     }])
     .factory('DeliverymanOrder', ['$resource', 'appConfig', function($resource, appConfig){
-        return $resource(appConfig.baseUrl + '/api/deliveryman/order/:id',
+        var url = appConfig.baseUrl + '/api/deliveryman/order/:id'
+        return $resource(url,
             {id: '@id'},
             {
                 query: {
                     isArray: false
+                },
+                updateStatus:{
+                    method: 'PATCH',
+                    url: url + '/update-status'
+                },
+                geo:{
+                    method: 'POST',
+                    url: url + '/geo'
                 }
             }
         );

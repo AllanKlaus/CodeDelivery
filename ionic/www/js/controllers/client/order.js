@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
     .controller('ClientOrderCtrl', [
-        '$scope', '$state', '$ionicLoading', 'ClientOrder',
-        function($scope, $state, $ionicLoading, ClientOrder){
+        '$scope', '$state', '$ionicLoading', '$ionicActionSheet', 'ClientOrder',
+        function($scope, $state, $ionicLoading, $ionicActionSheet, ClientOrder){
             $scope.items = [];
 
             $ionicLoading.show({
@@ -20,6 +20,31 @@ angular.module('starter.controllers')
             $scope.openOrderDetail = function(order){
                 console.log(order);
                 $state.go('client.view_order', {id: order.id})
+            };
+
+            $scope.showActionSheet = function(order){
+                $ionicActionSheet.show({
+                    buttons: [
+                        {text: 'Ver Detalhes'},
+                        {text: 'Ver Entrega'}
+                    ],
+                    titleText: 'O que fazer?',
+                    cancelText: 'Cancelar',
+                    cancel: function(){
+                        //cancelar
+                    },
+                    buttonClicked: function(index){
+                        switch (index){
+                            case 0:
+                                $state.go('client.view_order', {id: order.id});
+                                break;
+                            case 1:
+                                $state.go();
+                                break;
+                        }
+                    }
+                    //destructiveText: 'Delete'
+                });
             };
 
             function getOrders(){
